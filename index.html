@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoshizora — Belajar Bahasa Jepang</title>
+<meta name="description" content="Hoshizora: aplikasi belajar bahasa Jepang dari nol sampai siap JLPT. Hiragana, katakana, 4.600+ kosakata, 800+ kanji, bacaan N5–N1, dan komunitas Sakura Nakama. Gratis untuk Android.">
+<style>
+  :root{
+    --background:#12101E; --surface:#1E1B33; --surface-high:#262242; --border:#37335C;
+    --foreground:#F2F0FF; --muted:#A7A3C7; --primary:#6C6CFF; --primary-strong:#8A8AFF;
+    --accent:#FFB020; --sakura:#FF8FB2; --success:#4ADE80;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--background);color:var(--foreground);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  header{padding:28px 0 8px;display:flex;align-items:center;gap:12px}
+  .logo{width:46px;height:46px;flex:0 0 auto}
+  .brand{font-size:24px;font-weight:700;letter-spacing:.2px}
+  .brand small{display:block;font-size:13px;font-weight:500;color:var(--muted);letter-spacing:.4px}
+  .hero{padding:44px 0 8px;text-align:left}
+  .badge{display:inline-block;background:var(--surface-high);border:1px solid var(--border);
+    color:var(--accent);border-radius:999px;padding:5px 14px;font-size:13px;font-weight:600;letter-spacing:.3px}
+  h1{font-size:40px;line-height:1.2;font-weight:800;margin:18px 0 14px}
+  h1 .hl{color:var(--sakura)}
+  .lead{color:var(--muted);font-size:18px;max-width:640px}
+  .cta{margin:28px 0 10px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .btn-download{display:inline-flex;align-items:center;gap:10px;background:var(--primary);
+    color:#fff;font-weight:700;font-size:17px;text-decoration:none;
+    padding:15px 28px;border-radius:999px;min-height:56px;
+    box-shadow:0 8px 24px rgba(108,108,255,.35);transition:background .2s ease,transform .2s ease}
+  .btn-download:hover{background:var(--primary-strong)}
+  .btn-download:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+  .btn-download svg{width:22px;height:22px;flex:0 0 auto}
+  .btn-ghost{display:inline-flex;align-items:center;min-height:56px;padding:15px 22px;border-radius:999px;
+    border:1px solid var(--border);color:var(--foreground);text-decoration:none;font-weight:600;background:var(--surface)}
+  .btn-ghost:hover{border-color:var(--primary)}
+  .meta{color:var(--muted);font-size:14px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:36px 0 8px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px 14px;text-align:center}
+  .stat b{display:block;font-size:26px;color:var(--accent)}
+  .stat span{font-size:13px;color:var(--muted)}
+  section{padding:38px 0 6px}
+  h2{font-size:26px;font-weight:800;margin-bottom:8px}
+  .sub{color:var(--muted);max-width:620px;margin-bottom:20px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px 20px}
+  .card svg{width:30px;height:30px;color:var(--primary-strong);margin-bottom:12px}
+  .card h3{font-size:17px;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:14.5px}
+  .changes{display:flex;flex-direction:column;gap:12px}
+  .change{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px 20px}
+  .change .v{color:var(--accent);font-weight:700;font-size:14px;letter-spacing:.4px}
+  .change h3{font-size:16.5px;margin:3px 0 4px}
+  .change p{color:var(--muted);font-size:14.5px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:step}
+  .step{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px}
+  .step b{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;
+    background:var(--primary);color:#fff;font-size:16px;margin-bottom:10px}
+  .step p{color:var(--muted);font-size:14.5px}
+  .note{background:var(--surface-high);border:1px solid var(--border);border-radius:18px;padding:18px 20px;color:var(--muted);font-size:14.5px}
+  .note b{color:var(--foreground)}
+  footer{padding:38px 0 44px;color:var(--muted);font-size:14px;text-align:center}
+  footer .fname{color:var(--foreground);font-weight:700}
+  @media (max-width:760px){
+    h1{font-size:31px}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .grid,.steps{grid-template-columns:1fr}
+    .hero{padding-top:30px}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn-download{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <svg class="logo" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <circle cx="24" cy="24" r="21" stroke="#FF8FB2" stroke-width="2.5"/>
+      <path d="M24 12l3.2 7.4L35 21l-7.8 1.6L24 30l-3.2-7.4L13 21l7.8-1.6L24 12z" fill="#FFB020"/>
+      <circle cx="35.5" cy="33.5" r="2.4" fill="#8A8AFF"/>
+      <circle cx="12.5" cy="14.5" r="1.8" fill="#8A8AFF"/>
+    </svg>
+    <div class="brand">Hoshizora<small>SAKURA NAKAMA</small></div>
+  </header>
+
+  <div class="hero">
+    <span class="badge">Aplikasi Android · Gratis</span>
+    <h1>Belajar Bahasa Jepang,<br>dari nol sampai <span class="hl">siap JLPT</span>.</h1>
+    <p class="lead">Satu aplikasi untuk membaca hiragana &amp; katakana dari dasar, menghafal ribuan kosakata dan kanji dengan pengulangan terjadwal, membaca bacaan bertingkat N5–N1, dan belajar bareng komunitas Sakura Nakama.</p>
+    <div class="cta">
+      <a class="btn-download" id="btnDownload" href="https://github.com" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m6.5 10.5 5.5 5.5 5.5-5.5"/><path d="M4 20h16"/></svg>
+        Unduh Hoshizora v2.0.7
+      </a>
+      <a class="btn-ghost" id="linkReleases" href="https://github.com" rel="noopener">Lihat semua versi</a>
+    </div>
+    <p class="meta">Berkas APK · 17,5 MB · untuk ponsel Android</p>
+  </div>
+
+  <div class="stats" role="list" aria-label="Isi materi Hoshizora">
+    <div class="stat" role="listitem"><b>4.600+</b><span>kosakata</span></div>
+    <div class="stat" role="listitem"><b>800+</b><span>kanji</span></div>
+    <div class="stat" role="listitem"><b>500+</b><span>pola tata bahasa</span></div>
+    <div class="stat" role="listitem"><b>94</b><span>bacaan bertingkat</span></div>
+  </div>
+
+  <section>
+    <h2>Yang bisa kamu pelajari</h2>
+    <p class="sub">Jalur belajarnya bertahap — mulai dari membaca huruf, sampai membaca esai dan simulasi ujian.</p>
+    <div class="grid">
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19l7-7a4.95 4.95 0 1 0-7-7l-7 7v7h7z"/><path d="m18 13-7-7"/><path d="M5 21l3.5-1.5L7 16 5 21z"/></svg>
+        <h3>Kana dari Nol</h3>
+        <p>Hiragana &amp; katakana dipelajari per kelompok bunyi, lengkap dengan latihan menulis terpandu yang menunjukkan urutan coretan yang benar.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>
+        <h3>Tes Kotoba Dua Arah</h3>
+        <p>Kosakata diuji dua arah per tahap: dari romaji memilih kana yang benar, dan dari kana memilih bacaan yang benar.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="m9.5 15.5 2 2 3.5-4"/></svg>
+        <h3>Hafalan Terjadwal</h3>
+        <p>Kartu hafalan muncul kembali tepat sebelum kamu lupa, jadi kosakata dan kanji menempel untuk jangka panjang — bukan hafalan semalam.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+        <h3>Materi N5 sampai N1</h3>
+        <p>Kosakata, kanji, tata bahasa, dan bacaan tersusun per tingkat JLPT — termasuk bacaan lanjutan setara esai untuk yang sudah mahir.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+        <h3>Kuis &amp; Simulasi JLPT</h3>
+        <p>Kuis kilat untuk pemanasan, soal harian, dan simulasi ujian penuh dengan label tingkat ganda JLPT &amp; CEFR.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M15.5 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h3>Komunitas Sakura Nakama</h3>
+        <p>Berbagi catatan belajar, saling mengoreksi kalimat, ikut tantangan, dan naik peringkat bersama anggota lain di dalam aplikasi.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Yang baru</h2>
+    <p class="sub">Hoshizora terus diperbarui. Ini tiga pembaruan terakhir:</p>
+    <div class="changes">
+      <div class="change">
+        <span class="v">v2.0.7 — TERBARU</span>
+        <h3>Sistem Saran &amp; Masukan</h3>
+        <p>Sekarang ada menu Saran &amp; Masukan di bagian Profil. Kirim saran fitur, laporan bug, atau masukan materi langsung dari aplikasi — statusnya bisa dipantau dan pengelola bisa membalasnya.</p>
+      </div>
+      <div class="change">
+        <span class="v">v2.0.6</span>
+        <h3>Ratusan Materi Baru</h3>
+        <p>+459 kosakata, +112 kanji, +48 pola tata bahasa, +20 soal kuis pemula, dan 4 bacaan baru (N3, N2, N1, dan esai lanjutan). Latihan menulis terpandu juga diperbaiki tampilannya.</p>
+      </div>
+      <div class="change">
+        <span class="v">v2.0.5</span>
+        <h3>Tes Kotoba &amp; Menulis Terpandu</h3>
+        <p>Tes kosakata kana dua arah per tahap, dan latihan menulis dengan panduan urutan coretan untuk seluruh 173 aksara kana.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cara memasang</h2>
+    <p class="sub">Hoshizora dibagikan sebagai berkas APK resmi dari halaman ini.</p>
+    <div class="steps">
+      <div class="step"><b>1</b><p>Tekan tombol <strong>Unduh</strong> di atas dan tunggu berkas Hoshizora.apk selesai diunduh.</p></div>
+      <div class="step"><b>2</b><p>Buka berkasnya. Bila ponsel meminta izin memasang dari peramban/pengelola berkas, izinkan — itu langkah standar untuk pemasangan APK.</p></div>
+      <div class="step"><b>3</b><p>Tekan Pasang, lalu buka Hoshizora dan mulai dari pelajaran kana pertama. Selamat belajar!</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="note">
+      <b>Punya saran?</b> Sesudah memasang, buka menu <b>Profil → Saran &amp; Masukan</b> di dalam aplikasi. Saranmu dibaca langsung oleh pengelola, bisa dipantau statusnya, dan akan dibalas di sana.
+    </div>
+  </section>
+
+  <footer>
+    <span class="fname">Hoshizora</span> · Sakura Nakama<br>
+    Aplikasi belajar bahasa Jepang untuk Android — gratis, tanpa iklan.
+  </footer>
+
+</div>
+<script>
+  // Tautan unduh selalu menunjuk rilis terbaru di repo yang sama
+  // dengan halaman ini (GitHub Pages -> github.com/<user>/<repo>).
+  (function () {
+    var user = location.hostname.split(".")[0];
+    var repo = location.pathname.split("/").filter(Boolean)[0] || "";
+    if (user && repo) {
+      document.getElementById("btnDownload").href =
+        "https://github.com/" + user + "/" + repo + "/releases/latest/download/Hoshizora.apk";
+      document.getElementById("linkReleases").href =
+        "https://github.com/" + user + "/" + repo + "/releases";
+    }
+  })();
+</script>
+</body>
+</html>
