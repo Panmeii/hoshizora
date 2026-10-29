@@ -1,0 +1,14 @@
+{
+  "packs": [
+    {
+      "id": "anime",
+      "name": "Kosakata Anime & Manga",
+      "version": 1,
+      "description": "Kata-kata yang hidup di dunia anime, manga, dan fandom — dari oshi sampai gacha — lengkap dengan kalimat contoh. Isi: 33 kata.",
+      "files": [
+        "vocab_anime.txt"
+      ],
+      "sizeKb": 6
+    }
+  ]
+}
